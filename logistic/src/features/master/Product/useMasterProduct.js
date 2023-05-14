@@ -6,16 +6,7 @@ import { addProduct, deleteProduct, selectProduct, updateProduct } from "./maste
 const useMasterProduct = () => {
     const dispatch = useDispatch();
     const products = useSelector(selectProduct);
-
-    const handleAddProduct = () => {
-        const newProduct = {
-            id: Date.now(),
-            name: "New Product",
-            buyPrice: 0,
-            sellPrice: 0,
-            stock: 0,
-            photoUrl: ""
-        };
+    const handleAddProduct = (newProduct) => {
         dispatch(addProduct(newProduct));
     };
 
