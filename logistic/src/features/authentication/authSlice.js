@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { fetchCount } from "./counterAPI";
+import { fetchCount } from "./authAPI";
 
 const initialState = {
     userInformation: {
@@ -50,11 +50,5 @@ export const { incrementByAmount, signOut } = authSlice.actions;
 export const selectIsLogin = (state) => state.auth.isLogin;
 export const selectUserInformation = (state) => state.auth.userInformation;
 
-export const incrementIfOdd = (amount) => (dispatch, getState) => {
-    const currentValue = selectIsLogin(getState());
-    if (currentValue % 2 === 1) {
-        dispatch(incrementByAmount(amount));
-    }
-};
-
-export default authSlice.reducer;
+const authReducer = authSlice.reducer;
+export default authReducer;
