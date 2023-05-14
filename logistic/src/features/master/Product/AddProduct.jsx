@@ -18,10 +18,10 @@ const SubmitButton = styled.button`
 `;
 const AddProduct = ({ label = "", onClick, toggleDialog }) => {
     const [formData, setForm] = useState({
-        name: "",
-        buyPrice: 0,
-        sellPrice: 0,
-        stock: 0,
+        name: "New Product",
+        buyPrice: null,
+        sellPrice: null,
+        stock: 1,
         photoUrl: ""
     });
     const updateForm = (payload) => {

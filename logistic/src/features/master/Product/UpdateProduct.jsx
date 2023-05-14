@@ -16,15 +16,29 @@ const SubmitButton = styled.button`
     padding: 1rem;
     width: 100%;
 `;
-const AddProduct = ({ label = "", onClick, toggleDialog }) => {
-    const [formData, setForm] = useState({});
+const UpdateProduct = ({ label = "", onClick, row = {}, toggleDialog }) => {
+    const [formData, setForm] = useState(row);
     const updateForm = (payload) => {
-        setForm({ ...formData, payload });
+        setForm({ ...formData, ...payload });
     };
-    const handleClick = async (payload) => {
-        await onClick(payload);
+    const handleClick = async () => {
+        await onClick({ ...formData, id: Date.now() });
         toggleDialog();
     };
+
+    const handleFileChange = ({ target }) => {
+        let imageFile = target.files[0];
+        if (imageFile) {
+            const photoUrl = URL.createObjectURL(imageFile);
+            updateForm({ photoUrl });
+        }
+    };
+
+    const getFormLength = Object.keys(formData);
+    const getDisabled =
+        Object.keys(formData)
+            .map((key) => formData[key])
+            .filter((data) => data).length !== getFormLength.length;
     return (
         <div>
             <Form>
@@ -34,21 +48,23 @@ const AddProduct = ({ label = "", onClick, toggleDialog }) => {
                     name="buyPrice"
                     onChange={updateForm}
                     type="number"
-                    value={formData["name"]}
+                    value={formData["buyPrice"]}
                 />
                 <TextField
                     label="Harga jual"
                     name="sellPrice"
                     onChange={updateForm}
                     type="number"
-                    value={formData["name"]}
+                    value={formData["sellPrice"]}
                 />
-                <TextField label="Stok" name="stock" onChange={updateForm} type="number" value={formData["name"]} />
+                <TextField label="Stok" name="stock" onChange={updateForm} type="number" value={formData["stock"]} />
             </Form>
-            <Photo type="file" accept=".jpg,.jpeg,.png" max-size="100000" />
-            <SubmitButton onClick={handleClick}>{label}</SubmitButton>
+            <Photo type="file" accept=".jpg,.jpeg,.png" max-size="100000" onChange={handleFileChange} />
+            <SubmitButton onClick={handleClick} disabled={getDisabled}>
+                {label}
+            </SubmitButton>
         </div>
     );
 };
 
-export default AddProduct;
+export default UpdateProduct;
