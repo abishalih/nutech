@@ -7,13 +7,13 @@ import TableToolbar from "./TableToolbar";
 const Table = styled.table`
     width: 100%;
 `;
-const EnhancedTable = ({ columns = [], data = [], toolbarActions = [] }) => {
+const EnhancedTable = ({ actions = false, columns = [], data = [], toolbarActions = [] }) => {
     return (
         <TableProvider defaultProps={{ columns, data }}>
             <TableToolbar actions={toolbarActions} />
             <Table>
-                <TableHeader />
-                <TableBody data={data} />
+                <TableHeader actions={actions} />
+                <TableBody actions={actions} data={data} />
             </Table>
             <TableDialog />
         </TableProvider>

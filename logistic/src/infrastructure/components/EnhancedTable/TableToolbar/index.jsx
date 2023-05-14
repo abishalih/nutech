@@ -13,12 +13,11 @@ const Title = styled.h1`
     font-size: 16pt;
 `;
 const TableToolbar = ({ actions = [] }) => {
-    const toolbarProps = useContext(TableContext);
-    const { toggleDialog } = toolbarProps;
+    const { toggleDialog } = useContext(TableContext);
     return (
         <Container>
             <Title>Table</Title>
-            <TableToolbarActions actions={actions} toggleDialog={toggleDialog} />{" "}
+            <TableToolbarActions actions={actions} toggleDialog={toggleDialog} />
         </Container>
     );
 };

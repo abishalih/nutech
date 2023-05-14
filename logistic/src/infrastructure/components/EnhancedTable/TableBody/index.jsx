@@ -1,10 +1,10 @@
 import TableBodyRow from "./TableBodyRow";
 
-const TableBody = ({ data = [] }) => {
+const TableBody = ({ actions = false, data = [] }) => {
     return (
         <thead>
             {data.map((datum, key) => (
-                <TableBodyRow key={key} {...datum} />
+                <TableBodyRow key={key} {...datum} isActions={actions} />
             ))}
         </thead>
     );
