@@ -1,8 +1,10 @@
+import LoadingPage from "infrastructure/components/common/LoadingPage";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 import App from "./app/App";
-import { store } from "./app/store";
+import { originalStore, persistor } from "./app/store";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
@@ -11,8 +13,10 @@ const root = createRoot(container);
 
 root.render(
     <StrictMode>
-        <Provider store={store}>
-            <App />
+        <Provider store={originalStore}>
+            <PersistGate loading={LoadingPage} persistor={persistor}>
+                <App />
+            </PersistGate>
         </Provider>
     </StrictMode>
 );
