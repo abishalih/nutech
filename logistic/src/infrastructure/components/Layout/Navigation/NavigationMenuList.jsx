@@ -1,5 +1,5 @@
 const NavigationMenuList = () => {
-    return <div>NavigationMenuList</div>;
+    return <p align="center">Navigation still under construction!</p>;
 };
 
 export default NavigationMenuList;

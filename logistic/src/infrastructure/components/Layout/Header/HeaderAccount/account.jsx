@@ -48,7 +48,7 @@ const HeaderAccount = () => {
         <Container>
             <Wrapper>
                 <h1 className={"text-gray-600"}>Selamat pagi,</h1>
-                <h2 className={"text-gray-800"}>{name}</h2>
+                <h2 className={"text-gray-800"}>{name ? name : "Login is under construction!"}</h2>
             </Wrapper>
             <Avatar onClick={toggleDrawer}>{generateInitialName(name)}</Avatar>
         </Container>
