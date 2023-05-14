@@ -1,86 +1,8 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true,
-        "jest": true
-    },
-    "parser": "@typescript-eslint/parser",
     "plugins": ["prettier"],
-    "extends": [
-        // "airbnb/base",
-        // "airbnb",
-        "prettier",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:import/typescript"
-    ],
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "project": "./tsconfig.json"
-    },
+    "extends": ["eslint:recommended", "plugin:prettier/recommended"],
     "rules": {
-        "prettier/prettier": [
-            "error",
-            {
-                "endOfLine": "auto"
-            }
-        ],
-        "semi": ["error", "always"],
-        "object-curly-spacing": ["error", "always"],
-        "import/no-named-as-default": "off",
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/no-explicit-any": 1,
-        "@typescript-eslint/no-inferrable-types": [
-            "warn",
-            {
-                "ignoreParameters": true
-            }
-        ],
-        "no-unmodified-loop-condition": "error",
-        "no-underscore-dangle": "off",
-        "no-shadow": "off",
-        "no-new": 0,
-        "@typescript-eslint/no-shadow": ["error"],
-        "@typescript-eslint/no-unused-vars": "warn",
-        "quotes": [
-            2,
-            "double",
-            {
-                "avoidEscape": true
-            }
-        ],
-        "indent": ["warn", 4],
-        "class-methods-use-this": "off",
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            {
-                "js": "never",
-                "jsx": "never",
-                "ts": "never",
-                "tsx": "never"
-            }
-        ],
-        "linebreak-style": 0,
-        // Added Manually
-        "@typescript-eslint/no-var-requires": "off",
-        "@typescript-eslint/camelcase": "off",
-        "camelcase": "off",
-        "no-nested-ternary": "off",
-        "no-script-url": "off",
-        "no-use-before-define": "off"
-        // Added Manually
-    },
-    // Added Manually
-    "settings": {
-        "import/resolver": {
-            "typescript": "./tsconfig.json",
-            "node": {
-                "extensions": [".js", ".jsx", ".ts", ".tsx"],
-                "paths": ["src", "src/application", "src/infrastructure", "src/main", "src/presentation"]
-            }
-        }
+        // Your rules go here
+        "prettier/prettier": ["error", { "endOfLine": "auto" }]
     }
-    // Added Manually
 }
