@@ -20,7 +20,7 @@ export const TableProvider = ({ defaultProps = {}, children }) => {
     const [tableData, setTableData] = useState({ columns, data, dialog: defaultDialogPayload });
 
     const updateContext = (newData) => {
-        setTableData(newData);
+        setTableData({ ...tableData, ...newData });
     };
 
     const toggleDialog = (dialogPayload) => {

@@ -12,6 +12,5 @@ export const TableAction = ({ dialog, label = "Action", onClick, title = label, 
         });
     const isDialogExist = !!dialog;
     const handleClick = isDialogExist ? handleDialog : onClick;
-    console.log({ handleClick });
     return <button onClick={handleClick}>{label}</button>;
 };

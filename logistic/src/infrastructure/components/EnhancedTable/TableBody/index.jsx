@@ -1,18 +1,16 @@
 import { useContext } from "react";
 import TableContext from "../TableContext";
-import TableBodyColumn from "./TableBodyColumn";
+import TableBodyRow from "./TableBodyRow";
 
-const TableBody = () => {
+const TableBody = ({ data = [] }) => {
     const bodyProps = useContext(TableContext);
-    const { columns = [], data = [] } = bodyProps;
+    const { columns = [] } = bodyProps;
     console.log({ columns, data });
     return (
         <thead>
-            <tr>
-                {data.map((datum, key) => (
-                    <TableBodyColumn {...datum} {...bodyProps} key={key} />
-                ))}
-            </tr>
+            {data.map((datum, key) => (
+                <TableBodyRow key={key} {...datum} />
+            ))}
         </thead>
     );
 };
