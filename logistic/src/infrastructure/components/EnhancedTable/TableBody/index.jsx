@@ -5,7 +5,6 @@ import TableBodyRow from "./TableBodyRow";
 const TableBody = ({ data = [] }) => {
     const bodyProps = useContext(TableContext);
     const { columns = [] } = bodyProps;
-    console.log({ columns, data });
     return (
         <thead>
             {data.map((datum, key) => (
