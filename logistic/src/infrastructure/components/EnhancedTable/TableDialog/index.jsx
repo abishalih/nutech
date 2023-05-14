@@ -1,72 +1,55 @@
-import CloseIcon from "@mui/icons-material/Close";
-import { Dialog, DialogContent, DialogContentText, DialogTitle, IconButton, Typography } from "@mui/material";
-import * as Provider from "infrastructure/components/EnhancedTable/TableContext";
-import { defaultDialogProps } from "infrastructure/components/common/main/dialog";
-import useTableDialog from "./useTableDialog";
+import { useContext } from "react";
+import styled from "styled-components";
+import TableContext from "../TableContext";
 
-export const useTableDialogUpdater = () => {
-    const { getContext, setContext } = Provider;
-    const { tableDialog = defaultDialogProps } = getContext();
-    const setStateContext = setContext();
+const Screen = styled.div`
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+`;
+const Wrapper = styled.div`
+    background-color: white;
+    border: 1px solid black;
+    height: 500px;
+    margin: 15% auto;
+    padding: 1rem;
+    width: 50%;
+`;
+const Header = styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    button {
+        height: 25px;
+        width: 25px;
+    }
+`;
+const Content = styled.div`
+    padding: 1rem 0;
+`;
+const Dialog = () => {
+    const { dialog, toggleDialog } = useContext(TableContext);
+    const { container: Container, isOpen, payload, title } = dialog;
+    const handleClose = () => toggleDialog();
 
-    const updateTableDialog = (payload) => setStateContext("tableDialog", payload);
-    return { tableDialog, updateTableDialog };
-};
-
-const TableDialog = () => {
-    const {
-        closeDialog,
-        content = null,
-        isOpen = false,
-        large = false,
-        shrink = false,
-        size = "sm",
-        title = ""
-    } = useTableDialog();
+    if (!isOpen) return null;
     return (
-        <Dialog
-            fullWidth
-            maxWidth={size}
-            open={isOpen}
-            PaperProps={{
-                sx: {
-                    padding: shrink ? "0" : "24px",
-                    borderRadius: "16px",
-                    maxHeight: window?.screen?.availHeight < 1050 ? "90%" : large ? "900px" : "700px"
-                }
-            }}
-        >
-            {title && (
-                <DialogTitle
-                    id="alert-dialog-title"
-                    sx={{
-                        minWidth: "300px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: !shrink ? "0" : "24px",
-                        paddingBottom: "24px"
-                    }}
-                >
-                    <Typography
-                        sx={{
-                            fontWeight: "700",
-                            fontSize: "20px",
-                            lineHeight: "30px"
-                        }}
-                    >
-                        {title}
-                    </Typography>
-                    <IconButton color="primary" aria-label="Close Alert" component="span" onClick={closeDialog}>
-                        <CloseIcon />
-                    </IconButton>
-                </DialogTitle>
-            )}
-            <DialogContent sx={{ padding: 0 }}>
-                <DialogContentText id="alert-dialog-description">{content}</DialogContentText>
-            </DialogContent>
-        </Dialog>
+        <Screen>
+            <Wrapper>
+                <Header>
+                    <h3>{title}</h3>
+                    <button onClick={handleClose}>X</button>
+                </Header>
+                <hr />
+                <Content>
+                    <Container {...payload} />
+                </Content>
+            </Wrapper>
+        </Screen>
     );
 };
 
-export default TableDialog;
+export default Dialog;

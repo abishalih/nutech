@@ -1,29 +1,20 @@
-import { TableBody } from "@mui/material";
-import LoadingProgress from "infrastructure/components/common/LoadingProgress";
-import { SpannedCell } from "infrastructure/components/common/table/components/cell";
-import TableRow from "./TableRow";
-import useTableBody from "./useTableBody";
-import useTableBodyData from "./useTableBodyData";
+import { useContext } from "react";
+import TableContext from "../TableContext";
+import TableBodyColumn from "./TableBodyColumn";
 
-const EnhancedTableBody = (props) => {
-    const bodyProps = useTableBody(props);
-    const { columns = [], data = [], emptyRows, loading } = bodyProps;
+const TableBody = () => {
+    const bodyProps = useContext(TableContext);
+    const { columns = [], data = [] } = bodyProps;
+    console.log({ columns, data });
     return (
-        <TableBody>
-            {loading && (
-                <SpannedCell columns={columns}>
-                    <LoadingProgress />
-                </SpannedCell>
-            )}
-            {!loading && emptyRows && <SpannedCell columns={columns}>Data tidak ditemukan</SpannedCell>}
-            {!loading &&
-                !emptyRows &&
-                data.map((row, idx) => {
-                    const dataProps = useTableBodyData({ ...bodyProps, idx, row });
-                    return <TableRow {...bodyProps} {...dataProps} />;
-                })}
-        </TableBody>
+        <thead>
+            <tr>
+                {data.map((datum, key) => (
+                    <TableBodyColumn {...datum} {...bodyProps} key={key} />
+                ))}
+            </tr>
+        </thead>
     );
 };
 
-export default EnhancedTableBody;
+export default TableBody;

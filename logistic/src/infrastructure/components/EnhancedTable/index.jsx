@@ -1,38 +1,22 @@
-import { Box, Table, TableContainer } from "@mui/material";
+import styled from "styled-components";
 import TableBody from "./TableBody";
-import Provider from "./TableContext";
+import { TableProvider } from "./TableContext";
 import TableDialog from "./TableDialog";
 import TableHeader from "./TableHeader";
-import TablePagination from "./TablePagination";
 import TableToolbar from "./TableToolbar";
-import useTable from "./useTable";
-
-export const EnhancedTable = (props) => {
-    const {
-        payload,
-        propsBody,
-        propsHeader,
-        propsPagination,
-        propsTable,
-        propsTableContainer,
-        propsToolbar,
-        refreshTable,
-        searchKeyword
-    } = useTable(props);
+const Table = styled.table`
+    width: 100%;
+`;
+const EnhancedTable = ({ columns = [], data = [], toolbarActions = [] }) => {
     return (
-        <Box display={"grid"} mb={2} gap={"1rem"}>
-            <Provider tablePayload={payload}>
-                <TableToolbar {...propsToolbar} refreshTable={refreshTable} />
-                <TableContainer {...propsTableContainer}>
-                    <Table {...propsTable}>
-                        <TableHeader {...propsHeader} />
-                        <TableBody {...propsBody} refreshTable={refreshTable} searchKeyword={searchKeyword} />
-                    </Table>
-                </TableContainer>
-                <TablePagination {...propsPagination} />
-                <TableDialog />
-            </Provider>
-        </Box>
+        <TableProvider defaultProps={{ columns, data }}>
+            <TableToolbar actions={toolbarActions} />
+            <Table>
+                <TableHeader />
+                <TableBody />
+            </Table>
+            <TableDialog />
+        </TableProvider>
     );
 };
 
