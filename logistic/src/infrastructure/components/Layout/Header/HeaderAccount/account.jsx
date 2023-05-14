@@ -42,8 +42,7 @@ const Avatar = styled.div`
 
 const HeaderAccount = () => {
     const dispatch = useDispatch();
-    const { name = "User Name", ...props } = useUserInfo();
-    console.log({ props });
+    const { name = "User Name" } = useUserInfo();
     const toggleDrawer = () => dispatch(setUserAccount(true));
     return (
         <Container>
