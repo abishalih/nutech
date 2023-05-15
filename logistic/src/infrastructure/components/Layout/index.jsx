@@ -19,17 +19,19 @@ export const SubWrapper = styled.div`
     width: 100%;
 `;
 
-const Layout = ({ children }) => {
-    return (
-        <Wrapper>
-            <Navigation />
-            <SubWrapper>
-                <Header />
-                <Main>{children}</Main>
-                <Footer />
-            </SubWrapper>
-        </Wrapper>
-    );
+const Layout = ({ children, withLayout }) => {
+    if (withLayout)
+        return (
+            <Wrapper>
+                <Navigation />
+                <SubWrapper>
+                    <Header />
+                    <Main>{children}</Main>
+                    <Footer />
+                </SubWrapper>
+            </Wrapper>
+        );
+    return <>{children}</>;
 };
 
 export default Layout;
