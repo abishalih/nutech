@@ -1,4 +1,4 @@
-import { setUserAccount } from "infrastructure/components/componentSlice";
+import { signOut } from "features/authentication/authSlice";
 import { generateInitialName } from "infrastructure/utils/useStringManipulation";
 import { useUserInfo } from "infrastructure/utils/useUserInfo";
 import { useDispatch } from "react-redux";
@@ -42,15 +42,15 @@ const Avatar = styled.div`
 
 const HeaderAccount = () => {
     const dispatch = useDispatch();
-    const { name = "User Name" } = useUserInfo();
-    const toggleDrawer = () => dispatch(setUserAccount(true));
+    const { username = "User Name" } = useUserInfo();
+    const toggleDrawer = () => dispatch(signOut());
     return (
         <Container>
             <Wrapper>
                 <h1 className={"text-gray-600"}>Selamat pagi,</h1>
-                <h2 className={"text-gray-800"}>{name ? name : "Login is under construction!"}</h2>
+                <h2 className={"text-gray-800"}>{username ? username : "Login is under construction!"}</h2>
             </Wrapper>
-            <Avatar onClick={toggleDrawer}>{generateInitialName(name)}</Avatar>
+            <Avatar onClick={toggleDrawer}>{generateInitialName(username)}</Avatar>
         </Container>
     );
 };
