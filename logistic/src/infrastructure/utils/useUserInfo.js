@@ -4,14 +4,6 @@ import { generateCamelKey } from "./useCustomCase";
 
 export const useUserInfo = () => {
     const { userInformation = {} } = useSelector(selectUserInformation);
-    const {
-        email = "",
-        iss = "",
-        menu = [],
-        name = "",
-        poolCode = "",
-        realToken = "",
-        roleDesc = ""
-    } = generateCamelKey(userInformation);
-    return { email, iss, menu, name, poolCode, realToken, roleDesc };
+    const { username = "" } = generateCamelKey(userInformation);
+    return { username };
 };
