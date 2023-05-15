@@ -7,8 +7,6 @@ const Actions = styled.div`
     gap: 0.25rem;
 `;
 const TableBodyColumn = ({ id, row, toggleDialog, type }) => {
-    console.log({ id, row });
-
     if (id === "actions") {
         const actions = row[id] || [];
         return (
