@@ -12,7 +12,7 @@ const Form = styled.div`
 const Photo = styled.input`
     margin: 1rem 0;
 `;
-const SubmitButton = styled.button`
+export const SubmitButton = styled.button`
     padding: 1rem;
     width: 100%;
 `;
