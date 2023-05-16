@@ -4,7 +4,7 @@ import { setStorage } from "infrastructure/utils/useRoutes";
 import jwtEncode from "jwt-encode";
 
 const initialState = {
-    userInformation: { username: "" },
+    userInformation: {},
     isLogin: false,
     status: "idle"
 };
@@ -14,16 +14,19 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         signIn: (state, action) => {
-            const { redirectUri, ...payload } = action.payload;
-            state.userInformation = payload;
-            state.isLogin = true;
+            try {
+                const { redirectUri, ...payload } = action.payload;
+                state.userInformation = payload;
+                state.isLogin = true;
 
-            const secret = "secret";
-            const accessToken = jwtEncode(payload, secret);
-            setStorage(accessToken, "");
+                const secret = "secret";
+                const accessToken = jwtEncode(payload, secret);
+                setStorage(accessToken, "");
 
-            console.log({ payload, accessToken, redirectUri });
-            window.location.replace(redirectUri);
+                window.location.replace(redirectUri);
+            } catch (error) {
+                console.error("Error in signIn:", error);
+            }
         },
         signOut: (state) => {
             state.userInformation = initialState.userInformation;
