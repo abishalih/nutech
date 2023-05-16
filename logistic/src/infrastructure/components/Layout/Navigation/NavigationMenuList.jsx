@@ -12,8 +12,7 @@ const List = styled.a`
         background-color: #eee;
     }
 `;
-const NavigationMenuList = ({ icon, title, url, ...props }) => {
-    console.log(props);
+const NavigationMenuList = ({ icon, title, url }) => {
     return (
         <List href={url}>
             <img src={icon} alt="icon" />
