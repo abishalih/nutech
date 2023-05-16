@@ -1,7 +1,6 @@
 import { LIST_FEATURE } from "app/common";
 import styled from "styled-components";
 import NavigationMenuList from "./NavigationMenuList";
-import useFilterListNavigation from "./useFilterListNavigation";
 import useLayoutNavigation from "./useLayoutNavigation";
 
 const Container = styled.div`
@@ -24,7 +23,7 @@ const Navigation = () => {
     return (
         <Container>
             <List>
-                {useFilterListNavigation(LIST_FEATURE).map((listProps, menuKey) => (
+                {LIST_FEATURE.map((listProps, menuKey) => (
                     <NavigationMenuList {...navProps} {...listProps} key={menuKey} idx={menuKey} />
                 ))}
             </List>
